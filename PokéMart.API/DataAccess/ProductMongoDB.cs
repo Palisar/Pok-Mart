@@ -1,7 +1,4 @@
-﻿using MongoDB.Driver;
-using PokéMart.API.Models;
-
-namespace PokéMart.API.DataAccess
+﻿namespace PokéMart.API.DataAccess
 {
     public class ProductMongoDB
     {

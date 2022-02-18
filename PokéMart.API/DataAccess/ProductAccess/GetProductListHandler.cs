@@ -1,20 +1,19 @@
-﻿
-
-using MongoDB.Driver;
+﻿using PokéMart.API.Services;
 
 namespace PokéMart.API.DataAccess.ProductAccess
 {
     public class GetProductListHandler : IRequestHandler<GetProductListQuery, IEnumerable<Product>>
     {
-        private readonly IConfiguration _config;
+        private readonly IProductService _productService;
 
-        public GetProductListHandler(IConfiguration config)
+
+        public GetProductListHandler(IProductService productService)
         {
-            _config = config;
+            _productService = productService;
         }
         public Task<IEnumerable<Product>> Handle(GetProductListQuery request, CancellationToken cancellationToken)
         {
-            var client = new MongoClient(_config.GetConnectionString("connectionString"));
+            return _productService.GetAsync();
         }
     }
 }

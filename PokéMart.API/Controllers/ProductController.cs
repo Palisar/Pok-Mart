@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PokéMart.API.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using PokéMart.API.DataAccess.ProductAccess;
 
 namespace PokéMart.API.Controllers
 {
@@ -13,11 +12,11 @@ namespace PokéMart.API.Controllers
             _mediator = mediator;
         }
 
-        //TODO : Connect a DB and wire up Mediatr
-        // GET: ProductController
-        public ActionResult Index()
+        // GET: AllProducts
+        public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
         {
-            return View();
+            var products = await _mediator.Send(new GetProductListQuery());
+            return Ok(products);
         }
 
         // GET: ProductController/Details/5
