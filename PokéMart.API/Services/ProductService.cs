@@ -3,7 +3,9 @@ using MongoDB.Driver;
 
 namespace PokéMart.API.Services
 {
-    public class ProductService
+
+
+    public class ProductService : IProductService
     {
         public readonly IMongoCollection<Product> _productsCollection;
         public ProductService(IOptions<ProductMongoDB> productDbSettings)
