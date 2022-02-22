@@ -1,9 +1,14 @@
+using PokéMart.API.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<ProductMongoDB>(
     builder.Configuration.GetSection("ProductMongoDB"));
 // Add services to the container
+
+builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddMediatR(typeof(Program).Assembly);
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
