@@ -6,7 +6,6 @@ namespace PokéMart.API.DataAccess.ProductAccess
     {
         private readonly IProductService _productService;
 
-
         public GetProductListHandler(IProductService productService)
         {
             _productService = productService;
