@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PokéMart.API.DataAccess.ProductAccess;
+using PokeMart.Contracts.Responses;
 
 namespace PokéMart.API.Controllers
 {
-    public class ProductController : Controller
+    [ApiController]
+    [Route("/api/[controller]")]
+    public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;
 
@@ -12,80 +15,27 @@ namespace PokéMart.API.Controllers
             _mediator = mediator;
         }
 
-        // GET: AllProducts
-        public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllProducts()
         {
             var products = await _mediator.Send(new GetProductListQuery());
             return Ok(products);
         }
 
-        // GET: ProductController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductResponse>> GetProductByIdString(string id)
         {
-            return View();
+            var product = await _mediator.Send(new GetProductByIdQuery(id));
+            if (product is null)
+                return NotFound();
+
+            return Ok(product);
         }
 
-        // GET: ProductController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ProductController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult<string>> PostProduct(Product product)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProductController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ProductController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProductController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ProductController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var product = _mediator.Send(new AddNewProductCommand(product));
         }
     }
 }
