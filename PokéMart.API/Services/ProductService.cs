@@ -3,15 +3,15 @@ using MongoDB.Driver;
 
 namespace PokéMart.API.Services
 {
-
-
     public class ProductService : IProductService
     {
         public readonly IMongoCollection<Product> _productsCollection;
         public ProductService(IOptions<ProductMongoDB> productDbSettings)
         {
-            var mongoClient = new MongoClient(
-                productDbSettings.Value.connectionString);
+            var settings = MongoClientSettings.FromConnectionString(productDbSettings.Value.connectionString);
+            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+
+            var mongoClient = new MongoClient(settings);
             var mongoDb = mongoClient.GetDatabase(
                 productDbSettings.Value.databaseName);
             _productsCollection = mongoDb.GetCollection<Product>(
