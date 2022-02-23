@@ -35,7 +35,8 @@ namespace PokéMart.API.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> PostProduct(Product product)
         {
-            var product = _mediator.Send(new AddNewProductCommand(product));
+            var output = await _mediator.Send(new AddNewProductCommand(product));
+            return Ok(output);
         }
     }
 }

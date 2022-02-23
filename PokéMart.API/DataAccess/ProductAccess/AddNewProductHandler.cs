@@ -1,5 +1,5 @@
 ﻿using PokéMart.API.Services;
-using static PokéMart.API.DataAccess.ProductAccess.ProductCommands;
+using PokéMart.API.DataAccess.ProductAccess;
 
 namespace PokéMart.API.DataAccess.ProductAccess
 {
@@ -7,13 +7,14 @@ namespace PokéMart.API.DataAccess.ProductAccess
     {
         private readonly IProductService _productService;
 
-        public GetProductListHandler(IProductService productService)
+        public AddNewProductHandler(IProductService productService)
         {
             _productService = productService;
         }
         public async Task<string> Handle(AddNewProductCommand request, CancellationToken cancellationToken)
         {
-            var product = await _productService.CreateAsync(request.product);
+             await _productService.CreateAsync(request.product);
+            return "";
         }
     }
 }
