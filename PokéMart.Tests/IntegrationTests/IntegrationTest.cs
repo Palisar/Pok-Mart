@@ -3,29 +3,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-
 
 namespace PokéMart.Tests.IntegrationTests
 {
     public class IntegrationTest
     {
-        private readonly HttpClient _client;
+        protected readonly HttpClient _client;
 
-        public IntegrationTest()
+        protected IntegrationTest()
         {
             var appFactory = new WebApplicationFactory<Program>();
             _client = appFactory.CreateClient();
         }
-        
-        [Theory]
-        [InlineData("/api/product")]
-        public async Task GetAllProducts_ReturnsOk(string endpoint)
+
+        protected async Task AuthenticateAsync()
         {
-            var response = await _client.GetAsync(endpoint);
-            response.EnsureSuccessStatusCode();
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", GetJwtAsync());
         }
 
+        private async Task<string> GetJwtAsync()
+        {
+            
+        }
     }
 }
