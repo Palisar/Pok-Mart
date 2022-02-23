@@ -7,5 +7,6 @@
         Task CreateAsync(Product newProduct);
         Task UpdateAsync(string id, Product updateProduct);
         Task RemoveAsync(string id);
+
     }
 }

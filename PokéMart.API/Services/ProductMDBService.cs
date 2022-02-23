@@ -3,10 +3,10 @@ using MongoDB.Driver;
 
 namespace PokéMart.API.Services
 {
-    public class ProductService : IProductService
+    public class ProductMDBService : IProductService
     {
         public readonly IMongoCollection<Product> _productsCollection;
-        public ProductService(IOptions<ProductMongoDB> productDbSettings)
+        public ProductMDBService(IOptions<ProductMongoDB> productDbSettings)
         {
             var settings = MongoClientSettings.FromConnectionString(productDbSettings.Value.connectionString);
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);
