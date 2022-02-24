@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using PokéMart.API.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +18,15 @@ namespace PokéMart.Tests.IntegrationTests
 
         protected IntegrationTest()
         {
-            var appFactory = new WebApplicationFactory<Program>();
+            var appFactory = new WebApplicationFactory<Program>()
+                .WithWebHostBuilder(builder =>
+                {
+                    builder.ConfigureServices(services =>
+                    {
+                        services.RemoveAll(typeof(InMemoryProductService));
+                        services.AddTransient<IProductService, InMemoryProductService>();
+                    });
+                });
             _client = appFactory.CreateClient();
         }
 
