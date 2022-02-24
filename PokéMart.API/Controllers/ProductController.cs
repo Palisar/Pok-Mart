@@ -18,18 +18,15 @@ namespace PokéMart.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllProducts()
         {
-            var products = await _mediator.Send(new GetProductListQuery());
-            return Ok(products);
+            var response = await _mediator.Send(new GetProductListQuery());
+            return Ok(response);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("/{id}")]
         public async Task<ActionResult<ProductResponse>> GetProductByIdString(string id)
         {
-            var product = await _mediator.Send(new GetProductByIdQuery(id));
-            if (product is null)
-                return NotFound();
-
-            return Ok(product);
+            var response = await _mediator.Send(new GetProductByIdQuery(id));
+            return response == null ? NotFound() : Ok(response);
         }
 
         [HttpPost]
@@ -37,6 +34,13 @@ namespace PokéMart.API.Controllers
         {
             await _mediator.Send(new AddNewProductCommand(product));
             return Ok(product);
+        }
+
+        [HttpPut("/{id}")]
+        public async Task<ActionResult<Product>> EditProduct(string id, Product newProduct)
+        {
+            var response = await _mediator.Send(new UpdateProductCommand(id, newProduct));
+            return response == null ? NotFound() : Ok(response);
         }
     }
 }
