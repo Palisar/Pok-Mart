@@ -18,5 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PokeMart.Contracts\PokeMart.Contracts.csproj" />
   </ItemGroup>
-
+	<ItemGroup>
+		<InternalsVisibleTo Include="PokéMart.Tests" />
+	</ItemGroup>
 </Project>

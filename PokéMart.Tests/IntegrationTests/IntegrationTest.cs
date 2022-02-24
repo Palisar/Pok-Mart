@@ -19,14 +19,13 @@ namespace PokéMart.Tests.IntegrationTests
             _client = appFactory.CreateClient();
         }
 
-        protected async Task AuthenticateAsync()
-        {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", GetJwtAsync());
-        }
+        //protected async Task AuthenticateAsync()
+        //{
+        //    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", GetJwtAsync());
+        //}
 
-        private async Task<string> GetJwtAsync()
-        {
-            
-        }
+        //private async Task<string> GetJwtAsync()
+        //{
+        //}
     }
 }

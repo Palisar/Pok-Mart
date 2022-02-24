@@ -5,7 +5,7 @@ builder.Services.Configure<ProductMongoDB>(
     builder.Configuration.GetSection("ProductMongoDB"));
 // Add services to the container
 
-builder.Services.AddSingleton<IProductService, ProductService>();
+builder.Services.AddSingleton<IProductService, ProductMDBService>();
 builder.Services.AddMediatR(typeof(Program).Assembly);
 builder.Services.AddControllers();
 
