@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System.Threading.Tasks;
 
 namespace PokéMart.API.Services
 {
@@ -27,10 +28,19 @@ namespace PokéMart.API.Services
         public async Task CreateAsync(Product newProduct) =>
             await _productsCollection.InsertOneAsync(newProduct);
 
-        public async Task UpdateAsync(string id, Product updateProduct) =>
-            await _productsCollection.ReplaceOneAsync(x => x.Id == id, updateProduct);
+        public async Task<bool> UpdateAsync(string id, Product updateProduct)
+        {
+            var response = await _productsCollection.ReplaceOneAsync(x => x.Id == id, updateProduct);
+            return response.IsAcknowledged;
+        }
 
-        public async Task RemoveAsync(string id) =>
-            await _productsCollection.DeleteOneAsync(x => x.Id == id);
+
+        public async Task<bool> RemoveAsync(string id)
+        {
+            var response = await _productsCollection.DeleteOneAsync(x => x.Id == id);
+            return response.IsAcknowledged;
+        }
+
+
     }
 }

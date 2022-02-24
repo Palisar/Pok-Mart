@@ -5,8 +5,8 @@
         Task<IEnumerable<Product>> GetAsync();
         Task<Product?> GetAsync(string id);
         Task CreateAsync(Product newProduct);
-        Task UpdateAsync(string id, Product updateProduct);
-        Task RemoveAsync(string id);
+        Task<bool> UpdateAsync(string id, Product updateProduct);
+        Task<bool> RemoveAsync(string id);
 
     }
 }
