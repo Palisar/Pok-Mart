@@ -29,7 +29,7 @@ namespace PokéMart.API.Controllers
             return response == null ? NotFound() : Ok(response);
         }
 
-        [HttpPost]
+        [HttpPost("")]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
             await _mediator.Send(new AddNewProductCommand(product));
@@ -40,7 +40,14 @@ namespace PokéMart.API.Controllers
         public async Task<ActionResult<Product>> EditProduct(string id, Product newProduct)
         {
             var response = await _mediator.Send(new UpdateProductCommand(id, newProduct));
-            return response == null ? NotFound() : Ok(response);
+            return response == false ? NotFound() : Ok(response);
+        }
+
+        [HttpDelete("/{id}")]
+        public async Task<ActionResult> DeleteProduct(string id)
+        {
+            var response = await _mediator.Send(new DeleteProductCommand(id));
+            return response == false ? NotFound() : Ok(response);
         }
     }
 }

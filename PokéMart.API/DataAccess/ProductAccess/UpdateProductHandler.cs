@@ -2,7 +2,7 @@
 
 namespace PokéMart.API.DataAccess.ProductAccess
 {
-    public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Product>
+    public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, bool>
     {
         private readonly IProductService _productService;
 
@@ -11,10 +11,11 @@ namespace PokéMart.API.DataAccess.ProductAccess
             _productService = productService;
         }
 
-        public async Task<Product> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            await _productService.UpdateAsync(request.id, request.product);
-            return request.product;
+            request.product.Id = request.id;
+            var response = await _productService.UpdateAsync(request.id, request.product);
+            return response;
         }
     }
 }
