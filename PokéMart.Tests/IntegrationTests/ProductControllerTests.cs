@@ -5,11 +5,17 @@ namespace PokeMart.Tests.IntegrationsTests
 {
     public class ProductControllerTests : IntegrationTest
     {
-        [Theory]
-        [InlineData("/api/product")]
-        public async Task GetAllProducts_ReturnsOk(string endpoint)
+        [Fact]
+        public async Task GetAllProducts_ReturnsOk()
         {
-            var response = await _client.GetAsync(endpoint);
+            var response = await _client.GetAsync("/api/product");
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task GetProductById_ReturnsOk()
+        {
+            var response = await _client.GetAsync("/api/product/6214cd9ff357c214a3f3e0b6");
             response.EnsureSuccessStatusCode();
         }
     }

@@ -13,6 +13,10 @@ namespace PokéMart.API.DataAccess.ProductAccess
         }
         public async Task<Product> Handle(AddNewProductCommand request, CancellationToken cancellationToken)
         {
+            if (request.product.Price < 0)
+            {
+                request.product.Price = 0;
+            }
              await _productService.CreateAsync(request.product);
             return request.product;
         }

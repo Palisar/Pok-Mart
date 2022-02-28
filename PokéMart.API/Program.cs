@@ -3,6 +3,8 @@ using PokéMart.API.Services;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<ProductMongoDB>(
     builder.Configuration.GetSection("ProductMongoDB"));
+builder.Logging.AddDebug();
+builder.Logging.AddConsole();
 // Add services to the container
 
 builder.Services.AddSingleton<IProductService, ProductMDBService>();
