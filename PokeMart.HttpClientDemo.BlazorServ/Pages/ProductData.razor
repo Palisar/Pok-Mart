@@ -1,0 +1,61 @@
+﻿@page "/products"
+@inject IHttpClientFactory _clientFactory
+<h3>Products</h3>
+
+@if (string.IsNullOrWhiteSpace(errorString) == false)
+{
+    <div class="h2">@errorString</div>
+}
+else if (products == null)
+{
+    <div class="h4">Loading...</div>
+}
+else
+{
+    <div class="row">
+        @foreach (var product in products)
+        {
+
+            <div class="card m-2" style="width: 15rem">
+                <img class="card-img-top m-1" style="width:fit-content" src="@product.ImageUrl"
+             alt="Image Not Found">
+             
+                <div class="card-header-pills mt-1">
+                    <h4 class="card-title m-3">@product.Name</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@product.Description</p>
+                </div>
+
+                <a href="#" class="btn btn-primary m-2">
+                    Purchase
+                </a>
+
+            </div>
+        }
+    </div>
+
+}
+
+
+@code {
+    IEnumerable<ProductDTO> products;
+    string errorString;
+    protected override async Task OnInitializedAsync()
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get,
+          "https://localhost:7160/api/Product");
+        var client = _clientFactory.CreateClient();
+
+        HttpResponseMessage response = await client.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            products = await response.Content.ReadFromJsonAsync<IEnumerable<ProductDTO>>();
+        }
+        else
+        {
+            errorString = $"There was an error retrieving the products: {response.ReasonPhrase}";
+        }
+    }
+}
