@@ -34,13 +34,10 @@ namespace PokéMart.API.Services
             return response.IsAcknowledged;
         }
 
-
         public async Task<bool> RemoveAsync(string id)
         {
             var response = await _productsCollection.DeleteOneAsync(x => x.Id == id);
             return response.IsAcknowledged;
         }
-
-
     }
 }
