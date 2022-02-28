@@ -22,7 +22,7 @@ namespace PokéMart.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ProductResponse>> GetProductByIdString(string id)
         {
             var response = await _mediator.Send(new GetProductByIdQuery(id));
@@ -36,14 +36,14 @@ namespace PokéMart.API.Controllers
             return Ok(product);
         }
 
-        [HttpPut("/{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<Product>> EditProduct(string id, Product newProduct)
         {
             var response = await _mediator.Send(new UpdateProductCommand(id, newProduct));
             return response == false ? NotFound() : Ok(response);
         }
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(string id)
         {
             var response = await _mediator.Send(new DeleteProductCommand(id));
