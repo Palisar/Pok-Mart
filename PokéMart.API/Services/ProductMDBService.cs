@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System.Threading.Tasks;
 
 namespace PokéMart.API.Services
 {

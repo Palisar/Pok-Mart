@@ -49,7 +49,7 @@
                 return true;
             }
             return false;
-            
+
         }
 
         public async Task<bool> UpdateAsync(string id, Product updateProduct)
@@ -64,7 +64,7 @@
 
                 return true;
             }
-           return false;
+            return false;
         }
     }
 }

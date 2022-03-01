@@ -1,5 +1,4 @@
 ﻿using PokéMart.API.Services;
-using PokéMart.API.DataAccess.ProductAccess;
 
 namespace PokéMart.API.DataAccess.ProductAccess
 {
@@ -17,7 +16,7 @@ namespace PokéMart.API.DataAccess.ProductAccess
             {
                 request.product.Price = 0;
             }
-             await _productService.CreateAsync(request.product);
+            await _productService.CreateAsync(request.product);
             return request.product;
         }
     }

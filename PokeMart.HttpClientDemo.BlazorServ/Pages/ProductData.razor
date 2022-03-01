@@ -17,7 +17,7 @@ else
         {
 
             <div class="card m-2" style="width: 15rem">
-                <img class="card-img-top m-1" style="width:fit-content" src="@product.ImageUrl"
+                <img class="card-img-top m-1" style="width:20%" src="@product.ImageUrl"
              alt="Image Not Found">
              
                 <div class="card-header-pills mt-1">
@@ -27,7 +27,7 @@ else
                     <p class="card-text">@product.Description</p>
                 </div>
 
-                <a href="#" class="btn btn-primary m-2">
+                <a href="" class="btn btn-primary m-2">
                     Purchase
                 </a>
 
@@ -41,6 +41,7 @@ else
 @code {
     IEnumerable<ProductDTO> products;
     string errorString;
+
     protected override async Task OnInitializedAsync()
     {
         var request = new HttpRequestMessage(HttpMethod.Get,

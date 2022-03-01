@@ -1,0 +1,55 @@
+﻿@page "/addproduct"
+@inject NavigationManager UriHelper
+<h3>Add a new Product</h3>
+@inject IHttpClientFactory _clientFactory
+<div class="form-text">
+    <EditForm Model="@product" OnValidSubmit=@(() => Submit())>
+        <div class="row m-2">
+            <label for="@product.Name">Name</label>
+        <InputText id="name" @bind-Value=product.Name />
+
+        <label for="@product.Description">Description</label>
+        <InputText id="description" @bind-Value=product.Description />
+
+        <label for="@product.Price">Price</label>
+        <InputNumber id="price" @bind-Value="product.Price" />
+
+        <label for="@product.ImageUrl">Image Url</label>
+        <InputText class="mb-2" id="image" @bind-Value="product.ImageUrl" />
+
+        <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+        
+    </EditForm>
+</div>
+    
+
+
+@code {
+    private string error;
+    private ProductDTO product;
+    protected override async Task OnInitializedAsync()
+    {
+        product = new();
+    }
+
+    private async Task Submit()
+    {
+        var client = _clientFactory.CreateClient();
+        var json = JsonConvert.SerializeObject(product);
+        var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var url = "https://localhost:7160/api/Product";
+        HttpResponseMessage response = await client.PostAsync(url, data);
+
+        if (response.IsSuccessStatusCode)
+        {
+            UriHelper.NavigateTo("products");
+        }
+        else
+        {
+            error = $"There was a problem with your request {response.ReasonPhrase}";
+        }
+
+    }
+}
