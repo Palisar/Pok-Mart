@@ -29,7 +29,7 @@ namespace PokéMart.API.Controllers
             return response == null ? NotFound() : Ok(response);
         }
 
-        [HttpPost("")]
+        [HttpPost("add")]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
             await _mediator.Send(new AddNewProductCommand(product));
