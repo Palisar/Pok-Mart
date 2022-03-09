@@ -1,12 +1,19 @@
+using PokéMart.API.Models.MongoAccessConfigurations;
 using PokéMart.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//add Mongo Configurations from User Secrets
 builder.Services.Configure<ProductMongoDB>(
     builder.Configuration.GetSection("ProductMongoDB"));
+builder.Services.Configure<OrderMongoDB>(
+    builder.Configuration.GetSection("OrderMongoDB"));
+
+//add logging
 builder.Logging.AddDebug();
 builder.Logging.AddConsole();
-// Add services to the container
 
+// Add services to the container
 builder.Services.AddSingleton<IProductService, ProductMDBService>();
 builder.Services.AddMediatR(typeof(Program).Assembly);
 builder.Services.AddControllers();
