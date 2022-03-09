@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using PokéMart.API.Models.MongoAccessConfigurations;
 
 namespace PokéMart.API.Services
 {
