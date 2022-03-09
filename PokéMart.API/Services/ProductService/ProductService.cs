@@ -2,12 +2,12 @@
 using MongoDB.Driver;
 using PokéMart.API.Models.MongoAccessConfigurations;
 
-namespace PokéMart.API.Services
+namespace PokéMart.API.Services.ProductService
 {
-    public class ProductMDBService : IProductService
+    public class ProductService : IProductService
     {
         public readonly IMongoCollection<Product> _productsCollection;
-        public ProductMDBService(IOptions<ProductMongoDB> productDbSettings)
+        public ProductService(IOptions<ProductMongoDB> productDbSettings)
         {
             var settings = MongoClientSettings.FromConnectionString(productDbSettings.Value.connectionString);
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);

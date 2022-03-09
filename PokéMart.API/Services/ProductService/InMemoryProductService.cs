@@ -1,4 +1,4 @@
-﻿namespace PokéMart.API.Services
+﻿namespace PokéMart.API.Services.ProductService
 {
     public class InMemoryProductService : IProductService
     {

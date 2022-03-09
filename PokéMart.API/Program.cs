@@ -1,5 +1,7 @@
 using PokéMart.API.Models.MongoAccessConfigurations;
 using PokéMart.API.Services;
+using PokéMart.API.Services.OrderService;
+using PokéMart.API.Services.ProductService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,8 @@ builder.Logging.AddDebug();
 builder.Logging.AddConsole();
 
 // Add services to the container
-builder.Services.AddSingleton<IProductService, ProductMDBService>();
+builder.Services.AddSingleton<IProductService, ProductService>();
+builder.Services.AddSingleton<IOrderService, OrderService>();
 builder.Services.AddMediatR(typeof(Program).Assembly);
 builder.Services.AddControllers();
 
