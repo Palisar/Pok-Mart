@@ -1,0 +1,1 @@
+﻿public record GetOrderQuery(Guid orderId) : IRequest<Order>;

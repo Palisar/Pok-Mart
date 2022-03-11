@@ -6,7 +6,7 @@ namespace PokéMart.API.Services.ProductService
 {
     public class ProductService : IProductService
     {
-        public readonly IMongoCollection<Product> _productsCollection;
+        private readonly IMongoCollection<Product> _productsCollection;
         public ProductService(IOptions<ProductMongoDB> productDbSettings)
         {
             var settings = MongoClientSettings.FromConnectionString(productDbSettings.Value.connectionString);

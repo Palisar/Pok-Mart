@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokeMart.Tests", "PokéMart
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokeMart.Contracts", "PokeMart.Contracts\PokeMart.Contracts.csproj", "{031198BD-BF36-4037-8FB6-3F0D313AFD38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeMart.HttpClientDemo.BlazorServ", "PokeMart.HttpClientDemo.BlazorServ\PokeMart.HttpClientDemo.BlazorServ.csproj", "{27B353DD-AC99-4DD1-A5B1-219DDC8892A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokeMart.HttpClientDemo.BlazorServ", "PokeMart.HttpClientDemo.BlazorServ\PokeMart.HttpClientDemo.BlazorServ.csproj", "{27B353DD-AC99-4DD1-A5B1-219DDC8892A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeMart.Core", "PokeMart.Core\PokeMart.Core.csproj", "{516D42DE-99C5-438B-96AF-469B29B747A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{27B353DD-AC99-4DD1-A5B1-219DDC8892A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27B353DD-AC99-4DD1-A5B1-219DDC8892A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27B353DD-AC99-4DD1-A5B1-219DDC8892A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{516D42DE-99C5-438B-96AF-469B29B747A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{516D42DE-99C5-438B-96AF-469B29B747A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{516D42DE-99C5-438B-96AF-469B29B747A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{516D42DE-99C5-438B-96AF-469B29B747A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,25 +1,24 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using PokeMart.Contracts.Responses;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using PokeMart.Core.Models;
 
-namespace PokéMart.API.Models
+namespace PokeMart.Contracts.Responses
 {
-    public class Order
+    public class OrderResponse
     {
-        [BsonId]
-        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-        public string Id { get; set; }
         public Guid OrderId { get; init; } = Guid.NewGuid();
-        [Required]
+        
         public DateTimeOffset OrderDateTime { get; init; }
-        [Required]
+        
         public AddressModel ShippingAddress { get; set; }
-        [Required]
+      
         public AddressModel BillingAddress { get; set; }
-        [Required]
+        
         public IEnumerable<ProductResponse> Products { get; set; }
-        [Required]
+        
         public decimal TotalPrice { get; set; }
     }
 }

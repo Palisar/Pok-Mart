@@ -7,8 +7,8 @@ namespace PokéMart.API.Services.OrderService
 {
     public class OrderService : IOrderService
     {
-        public readonly IMongoCollection<Order> _orderCollection;
-        
+        private readonly IMongoCollection<Order> _orderCollection;
+
         public OrderService(IOptions<OrderMongoDB> orderDbSettings)
         {
             var settings = MongoClientSettings.FromConnectionString(orderDbSettings.Value.connectionString);
@@ -26,20 +26,21 @@ namespace PokéMart.API.Services.OrderService
             return order;
         }
 
-        public async ActionResult<Order> GetOrder(Guid orderId)
+        public async Task<Order> GetOrder(Guid orderId)
         {
-            var response = await _orderCollection.FindAsync(x => x.OrderId == orderId);
-            if (response == null) NotFoundResult();
+            return await _orderCollection.Find(x => x.OrderId == orderId).FirstOrDefaultAsync();
         }
 
-        public async Task UpdateOrder(Order order)
+        public async Task<bool> UpdateOrder(Order order, Guid orderId)
         {
-            throw new NotImplementedException();
+            var response = await _orderCollection.ReplaceOneAsync(x => x.OrderId == orderId, order);
+            return response.IsAcknowledged;
         }
 
-        public async Task RemoveOrder(Guid orderId)
+        public async Task<bool> RemoveOrder(Guid orderId)
         {
-            throw new NotImplementedException();
+            var response = await _orderCollection.DeleteOneAsync(x => x.OrderId == orderId);
+            return response.IsAcknowledged;
         }
     }
 }

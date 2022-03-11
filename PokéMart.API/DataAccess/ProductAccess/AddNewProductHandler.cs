@@ -1,4 +1,4 @@
-﻿using PokéMart.API.Services;
+﻿using PokéMart.API.Services.ProductService;
 
 namespace PokéMart.API.DataAccess.ProductAccess
 {
